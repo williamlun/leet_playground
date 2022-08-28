@@ -1,30 +1,7 @@
-import pydantic
-
-mylist = [1, 2, 3, 4, 5, 6, 7, 8, 8, 8, 8, 7, 6, 5, 4, 3, 2, 1]
-myset2 = list(set(mylist))
-
-
-print(myset2)
-print(type(myset2))
-
-my_dict = {"a": 1, "b": 2, "c": 3}
-
-
-class Mymodel(pydantic.BaseModel):
-    a: int
-    b: int
-    c: int
-    d: int = 999
-    e: int = -999
-    f: int = 999
-
-
-myobj = Mymodel(**my_dict)
-
-
+from typing import List
 
 nums = [-1,0,3,5,9,12]
-target = 12
+target = 1
 
 
 def search(nums: list[int], target: int) -> int:
@@ -44,4 +21,22 @@ def search(nums: list[int], target: int) -> int:
                     return i
             return -1
         
-print(search(nums,target))
+#print(search(nums,target))
+
+
+
+
+def search2( nums: List[int], target: int) -> int:
+    left = 0
+    right = len(nums) -1
+    while left <= right:
+        pivot = left + int((right - left)/2)
+        if(nums[pivot] == target):
+            return pivot
+        if(nums[pivot] > target):
+            right = pivot -1
+        else:
+            left = pivot + 1
+    return -1
+
+print(search2(nums,target))
